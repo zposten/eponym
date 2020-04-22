@@ -74,6 +74,8 @@ module.exports = async function main({
 
   if (!filePath) console.log('\n' + packageNames)
   console.log(
-    `\nWrote ${availablePackageNames.length} available package names to ${filePath}`,
+    `\nWrote ${availablePackageNames.length} available package names${
+      filePath ? ' to ' + filePath : ''
+    }`,
   )
 }
