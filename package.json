@@ -1,6 +1,6 @@
 {
   "name": "eponym",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A tool for finding available NPM package names",
   "repository": "https://github.com/zposten/eponym",
   "author": "Zach Posten",
