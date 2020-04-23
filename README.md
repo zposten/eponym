@@ -1,6 +1,6 @@
 # Eponym
 
-Eponym is a node script capable of generating a list of words that are currently available NPM packages. The list of words is pulled from the wonderful [WebstersEnglishDictionary](https://github.com/matthewreagan/WebstersEnglishDictionary).
+Eponym is a node script capable of generating a list of words that are currently available NPM packages. The list of words is pulled from a modified version of the wonderful [WebstersEnglishDictionary](https://github.com/matthewreagan/WebstersEnglishDictionary).
 
 > **eponym**: _noun_, a person after who a discovery, invention or place is named
 
@@ -19,11 +19,38 @@ If you're in the middle of a long running process though, you can terminate it a
 
 ## Options
 
-| Option                        | Default          | Description                                                                                                                                                      |
-| ----------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-l, --limit <limit>`         | -                | The number of dictionary words to run through NPM. The number of results may be less than this because any names which are already taken on NPM are not returned |
-| `--full-dictionary`           | false            | Process every word in the dictionary (**Warning**: This is very, _very_ slow)                                                                                    |
-| `-b, --batch-size <size>`     | 20               | The number of HTTP requests allowed to happen at once                                                                                                            |
-| `-m, --max-word-length <max>` | ∞                | Limit the results to words of a certain maximum length                                                                                                           |
-| `-w, --write <filePath>`      | print to console | Passing this option outputs the results to the specified file instead of printing them to the console                                                            |
-| `-p, --predictable`           | false            | Do not randomly choose words from the dictionary, instead start from the beginning                                                                               |
+### `-l, --limit <limit>`
+
+The number of dictionary words to run through NPM. The number of results returned will likely be less than this because any names which are already taken on NPM are not returned.
+
+This option is required unless `--full-dictionary` is passed.
+
+### `--full-dictionary`
+
+Process every word in the dictionary (**Warning**: This is very, _very_ slow).
+
+**Default**: `false`
+
+### `-b, --batch-size <size>`
+
+The number of HTTP requests allowed to happen at once.
+
+**Default**: `20`
+
+### `-m, --max-word-length <max>`
+
+Limit the results to words of a certain maximum length.
+
+**Default**: No limit
+
+### `-w, --write <filePath>`
+
+Passing this option outputs the results to the specified file instead of printing them to the console.
+
+**Default**: Write to console
+
+### `-p, --predictable`
+
+Do not randomly choose words from the dictionary, instead start from the beginning.
+
+**Default**: `false`
