@@ -4,19 +4,16 @@ Eponym is a node script capable of generating a list of words that are currently
 
 > **eponym**: _noun_, a person after who a discovery, invention or place is named
 
-Check the `out/` directory for the list of names from the last time it was run.
-
 ## Getting started
 
 ```
-git clone https://github.com/zposten/eponym.git
-cd eponym
-yarn
+# Grab 20 random words from the dictionary that are 6 characters or
+# less and return the ones that are available as package names on NPM
 
-# Grab 20 random words from the dictionary and return the ones
-# that are available as packages on NPM
-yarn start -l 20
+npx eponym --limit=20 --max-word-length=6
 ```
+
+An HTTP request has to be made for each word, so larger data sets can be time consuming. You can skip the wait by using the pre-compiled lists in the `out/` directory.
 
 ## Options
 

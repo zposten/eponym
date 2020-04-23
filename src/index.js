@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const {program} = require('commander')
 const eponym = require('./eponym')
 const chalk = require('chalk')

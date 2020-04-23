@@ -1,15 +1,23 @@
 {
   "name": "eponym",
-  "version": "0.0.1",
-  "description": "A Node utility for finding available NPM package names",
-  "main": "index.js",
+  "version": "0.0.2",
+  "description": "A tool for finding available NPM package names",
   "repository": "https://github.com/zposten/eponym",
   "author": "Zach Posten",
   "license": "MIT",
   "private": false,
+  "files": [
+    "src/**/*.js",
+    "static/*"
+  ],
+  "main": "src/index.js",
+  "bin": {
+    "eponym": "src/index.js"
+  },
   "scripts": {
     "start": "node src/index.js",
-    "write": "node src/index.js --write out/packageNames.txt"
+    "write": "node src/index.js --write out/packageNames.txt",
+    "execute": "chmod +x index.js"
   },
   "dependencies": {
     "chalk": "^4.0.0",
