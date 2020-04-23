@@ -28,9 +28,9 @@ if (program.fullDictionary && !program.write) {
 }
 
 generateNames({
-  limit: program.fullDictionary ? null : program.limit,
-  batchSize: program.batchSize,
-  maxWordLength: program.maxWordLength,
+  limit: program.fullDictionary ? null : Number(program.limit),
+  batchSize: Number(program.batchSize),
+  maxWordLength: Number(program.maxWordLength),
   filePath: program.write,
   random: !program.predictable,
 })
