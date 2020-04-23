@@ -15,6 +15,8 @@ npx eponym --limit=20 --max-word-length=6
 
 An HTTP request has to be made for each word, so larger data sets can be time consuming. You can skip the wait by using the pre-compiled lists in the `out/` directory.
 
+If you're in the middle of a long running process though, you can terminate it at any time and so long as you've passed the `--write` flag, the names processed so far will still be written to the file.
+
 ## Options
 
 | Option                        | Default          | Description                                                                                                                                                      |

@@ -21,6 +21,7 @@ async function getWords({limit, maxWordLength, random}) {
     words = words.filter((w) => w.length <= maxWordLength)
   }
 
+  if (!limit) return words
   return random ? sample(words, limit) : words.slice(0, limit)
 }
 
