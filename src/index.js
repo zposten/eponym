@@ -14,17 +14,16 @@ program
   .option('-p, --predictable', 'Start from the beginning of the dictionary file')
   .parse(process.argv)
 
-if (!program.limit && !program.fullDictionary) {
-  console.log(chalk.red('You must supply either --limit or --full-dictionary'))
+if (!program.limit == !program.fullDictionary) {
+  let msg = 'You must supply either --limit or --full-dictionary, but not both'
+  console.log(chalk.red(msg))
   process.exit(1)
 }
 
 if (program.fullDictionary && !program.write) {
-  console.log(
-    chalk.red(
-      'You must use --write to output to a file when using --full-dictionary',
-    ),
-  )
+  let msg =
+    'You must use --write to output to a file when using --full-dictionary'
+  console.log(chalk.red(msg))
   process.exit(1)
 }
 
