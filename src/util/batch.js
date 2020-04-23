@@ -16,12 +16,11 @@ async function batch(arr, {size, processItem, afterEachBatch}) {
     let promises = slice.map(processItem)
 
     let results = await Promise.all(promises)
-    batchResults.push(results)
+    batchResults.push(...results)
     if (afterEachBatch) afterEachBatch(results)
   }
 
-  // Flatten results of each batch into a single array
-  return [].concat.apply([], batchResults)
+  return batchResults
 }
 
 module.exports = {batch}
