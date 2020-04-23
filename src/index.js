@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const {program} = require('commander')
-const eponym = require('./eponym')
+const generateNames = require('./generateNames')
 const chalk = require('chalk')
 
 // prettier-ignore
@@ -27,7 +27,7 @@ if (program.fullDictionary && !program.write) {
   process.exit(1)
 }
 
-eponym({
+generateNames({
   limit: program.fullDictionary ? null : program.limit,
   batchSize: program.batchSize,
   maxWordLength: program.maxWordLength,

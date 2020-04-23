@@ -24,7 +24,7 @@ async function getWords({limit, maxWordLength, random}) {
   return random ? sample(words, limit) : words.slice(0, limit)
 }
 
-module.exports = async function main({
+module.exports = async function generateNames({
   limit,
   batchSize,
   maxWordLength,
