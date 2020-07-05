@@ -26,12 +26,12 @@ function outputToUser(filePath, packageNames) {
 
   if (outputPath) {
     console.log(
-      `\nWrote ${availablePackageNames.length} available package names${
+      `\nWrote ${packageNames.length} available package names${
         outputPath ? ' to ' + outputPath : ''
       }`,
     )
   } else {
-    console.log('\n' + packageNames)
+    console.log('\n' + packageNames.join('\n'))
   }
 }
 

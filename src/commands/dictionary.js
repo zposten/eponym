@@ -7,13 +7,6 @@ const {sample} = require('../util')
 const {outputToUser} = require('../helpers/output')
 
 module.exports = async function dictionary(args) {
-  if (!args.limit == !args.fullDictionary) {
-    let msg =
-      'You must supply either --limit or --full-dictionary, but not both'
-    console.log(chalk.red(msg))
-    process.exit(1)
-  }
-
   if (args.fullDictionary && !args.write) {
     let msg =
       'You must use --write to output to a file when using --full-dictionary'
@@ -23,19 +16,22 @@ module.exports = async function dictionary(args) {
 
   let limit = args.fullDictionary ? null : Number(args.limit)
   let maxWordLength = Number(args.maxWordLength)
+  let batchSize = Number(args.batchSize)
   let random = !args.predictable
   let filePath = args.write
+  let filter = args.filter
 
-  let words = await getRandomWords({limit, maxWordLength, random})
+  let getWords = () => getRandomWords({limit, maxWordLength, random})
 
   let availablePackageNames = await generateNames({
-    words,
-    batchSize: Number(args.batchSize),
+    getWords,
+    limit,
+    batchSize,
     filePath,
+    filter,
   })
 
-  let packageNames = availablePackageNames.join('\n')
-  outputToUser(filePath, packageNames)
+  outputToUser(filePath, availablePackageNames)
 }
 
 async function getRandomWords({limit, maxWordLength, random}) {

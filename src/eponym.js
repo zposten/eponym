@@ -7,7 +7,7 @@ eponym
   .alias('d')
   .description('Fetch words from a dictionary')
   .action(require('./commands/dictionary'))
-  .option('-l, --limit <limit>', 'number of words to process')
+  .option('-l, --limit <limit>', 'number of words to process', 50)
   .option('--full-dictionary', 'process every word in the dictionary')
   .option(
     '-b, --batch-size <size>',
@@ -22,6 +22,11 @@ eponym
   .option(
     '-p, --predictable',
     'Start from the beginning of the dictionary file',
+  )
+  .option(
+    '-f, --filter <platformName>',
+    'Filter names by availability on a platform',
+    'npm',
   )
 
 eponym
@@ -40,5 +45,10 @@ eponym
     'limit results to words of a certain length',
   )
   .option('-w, --write <filePath>', 'Write the results to a file')
+  .option(
+    '-f, --filter <platformName>',
+    'Filter names by availability on a platform',
+    'npm',
+  )
 
 eponym.version('0.1.0').parse(process.argv)
