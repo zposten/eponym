@@ -1,24 +1,17 @@
-const execa = require('execa')
-
+const doesPackageExistOnNpm = require('./doesPackageExistOnNpm')
 const {batch, ProgressBar} = require('../util')
-const {appendToFile, clearFile, outputToUser} = require('./output')
-
-async function doesPackageExist(packageName) {
-  let cmd = `npm search ${packageName}`
-  let {stdout} = await execa.command(cmd)
-  return !stdout.includes('No matches found')
-}
+const {appendToFile, clearFile} = require('./output')
 
 module.exports = async function generateNames({words, batchSize, filePath}) {
   await clearFile(filePath)
 
   let progressBar = Object.create(ProgressBar).start(words.length)
 
-  let packageAvailability = await batch(words, {
+  let availablePackageNames = await batch(words, {
     size: batchSize,
     async processItem(word) {
       // Determine if each word is a viable package name
-      let packageExists = await doesPackageExist(word)
+      let packageExists = await doesPackageExistOnNpm(word)
       progressBar.update()
       return packageExists ? null : word
     },
@@ -26,12 +19,11 @@ module.exports = async function generateNames({words, batchSize, filePath}) {
       if (!filePath) return
 
       // Output the results
-      let availablePackageNames = batch.filter(word => word)
-      let packageNames = availablePackageNames.join('\n') + '\n'
-      await appendToFile(filePath, packageNames)
+      let availableNames = batch.filter(name => name)
+      await appendToFile(filePath, availableNames.join('\n') + '\n')
     },
-  })
+  }).then(names => names.filter(name => name))
 
   progressBar.stop()
-  return packageAvailability.filter(word => word)
+  return availablePackageNames
 }

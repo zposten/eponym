@@ -3,20 +3,35 @@ const dataMuse = require('datamuse')
 
 const generateNames = require('../helpers/generateNames')
 const {outputToUser} = require('../helpers/output')
+const doesPackageExistOnNpm = require('../helpers/doesPackageExistOnNpm')
+const {batch, ProgressBar} = require('../util')
 
 module.exports = async function means(meansLike, args) {
   let limit = Number(args.limit)
   let maxWordLength = Number(args.maxWordLength)
   let filePath = args.write
+  let batchSize = Number(args.batchSize)
 
+  let availablePackageNames = []
   let words = await getMeaningfulWords({meansLike, limit, maxWordLength})
+  let progressBar = Object.create(ProgressBar).start(limit)
 
-  let availablePackageNames = await generateNames({
-    words,
-    batchSize: Number(args.batchSize),
-    filePath,
-  })
+  while (availablePackageNames.length < limit) {
+    let names = await batch(words, {
+      size: batchSize,
+      async processItem(word) {
+        let packageExists = await doesPackageExistOnNpm(word)
+        if (packageExists) return null
 
+        progressBar.update()
+        return word
+      },
+    }).then(names => names.filter(name => name))
+
+    availablePackageNames = availablePackageNames.concat(names)
+  }
+
+  progressBar.stop()
   let packageNames = availablePackageNames.join('\n')
   outputToUser(filePath, packageNames)
 }
