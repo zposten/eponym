@@ -10,19 +10,18 @@
     "src/**/*.js",
     "static/*"
   ],
-  "main": "src/index.js",
+  "main": "src/eponym.js",
   "bin": {
-    "eponym": "src/index.js"
+    "eponym": "src/eponym.js"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "write": "node src/index.js --write out/packageNames.txt",
-    "execute": "chmod +x index.js"
+    "start": "node src/eponym.js"
   },
   "dependencies": {
     "chalk": "^4.0.0",
     "cli-progress": "^3.8.0",
     "commander": "^5.0.0",
+    "datamuse": "^1.0.5",
     "execa": "^4.0.0",
     "fs-extra": "^9.0.0"
   }

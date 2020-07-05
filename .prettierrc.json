@@ -5,5 +5,5 @@
   "singleQuote": true,
   "quoteProps": "as-needed",
   "bracketSpacing": false,
-  "htmlWhitespaceSensitivity": "ignore"
+  "arrowParens": "avoid"
 }
