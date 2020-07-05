@@ -1,9 +1,7 @@
-const chalk = require('chalk')
 const dataMuse = require('datamuse')
+const npmName = require('npm-name')
 
-const generateNames = require('../helpers/generateNames')
 const {outputToUser} = require('../helpers/output')
-const doesPackageExistOnNpm = require('../helpers/doesPackageExistOnNpm')
 const {batch, ProgressBar} = require('../util')
 
 module.exports = async function means(meansLike, args) {
@@ -20,8 +18,9 @@ module.exports = async function means(meansLike, args) {
     let names = await batch(words, {
       size: batchSize,
       async processItem(word) {
-        let packageExists = await doesPackageExistOnNpm(word)
-        if (packageExists) return null
+        word = word.replace(/\s/g, '-')
+        let isAvailable = await npmName(word)
+        if (!isAvailable) return null
 
         progressBar.update()
         return word

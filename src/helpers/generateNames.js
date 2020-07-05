@@ -1,4 +1,5 @@
-const doesPackageExistOnNpm = require('./doesPackageExistOnNpm')
+const npmName = require('npm-name')
+
 const {batch, ProgressBar} = require('../util')
 const {appendToFile, clearFile} = require('./output')
 
@@ -10,10 +11,11 @@ module.exports = async function generateNames({words, batchSize, filePath}) {
   let availablePackageNames = await batch(words, {
     size: batchSize,
     async processItem(word) {
-      // Determine if each word is a viable package name
-      let packageExists = await doesPackageExistOnNpm(word)
+      word = word.replace(/\s/g, '-')
+
+      let isAvailable = await npmName(word)
       progressBar.update()
-      return packageExists ? null : word
+      return isAvailable ? word : null
     },
     async afterEachBatch(batch) {
       if (!filePath) return
