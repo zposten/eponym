@@ -3,20 +3,20 @@
 const eponym = require('commander')
 
 eponym
-  .command('dictionary')
+  .command('search')
   .alias('d')
-  .description('Fetch words from a dictionary')
-  .action(require('./commands/dictionary'))
-  .option('-l, --limit <limit>', 'number of words to process', 50)
-  .option('--full-dictionary', 'process every word in the dictionary')
+  .description('Search for words from a dictionary')
+  .action(require('./commands/search'))
+  .option('-l, --limit <limit>', 'Number of words to process', 50)
+  .option('--full-dictionary', 'Process every word in the dictionary')
   .option(
     '-b, --batch-size <size>',
-    'the number of HTTP requests out at once',
+    'The number of HTTP requests out at once',
     20,
   )
   .option(
     '-m, --max-word-length <max>',
-    'limit results to words of a certain length',
+    'Limit results to words of a certain length',
   )
   .option('-w, --write <filePath>', 'Write the results to a file')
   .option('-p, --predictable', 'Start from the beginning of the alphabet')
@@ -31,15 +31,15 @@ eponym
   .alias('m')
   .description('Fetch words with a similar meaning to another word')
   .action(require('./commands/means'))
-  .option('-l, --limit <limit>', 'number of words to process', 50)
+  .option('-l, --limit <limit>', 'Number of words to process', 50)
   .option(
     '-b, --batch-size <size>',
-    'the number of HTTP requests out at once',
+    'The number of HTTP requests out at once',
     20,
   )
   .option(
     '-m, --max-word-length <max>',
-    'limit results to words of a certain length',
+    'Limit results to words of a certain length',
   )
   .option('-w, --write <filePath>', 'Write the results to a file')
   .option('-p, --predictable', 'Start from the beginning of the alphabet')

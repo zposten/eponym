@@ -6,7 +6,7 @@ const generateNames = require('../helpers/generateNames')
 const {sample} = require('../util')
 const {outputToUser} = require('../helpers/output')
 
-module.exports = async function dictionary(args) {
+module.exports = async function search(args) {
   if (args.fullDictionary && !args.write) {
     let msg =
       'You must use --write to output to a file when using --full-dictionary'
