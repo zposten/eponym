@@ -29,11 +29,11 @@ module.exports = async function generateNames({
     }
 
     let batchIndex = 0
-    let names = await batch(words, {
+    await batch(words, {
       size: batchSize,
       async processItem(word) {
-        batchIndex++
         if (availablePackageNames.length + batchIndex >= limit) return null
+        batchIndex++
 
         let filter = getFilter(filterName)
         let filtered = await filter(word)
@@ -43,17 +43,14 @@ module.exports = async function generateNames({
       },
       async afterEachBatch(batch) {
         batchIndex = 0
-        if (!filePath) return
 
-        // Output the results
         let availableNames = batch.filter(name => name)
+        availablePackageNames = availablePackageNames.concat(availableNames)
+
+        if (!filePath) return
         await appendToFile(filePath, availableNames.join('\n') + '\n')
       },
     })
-
-    availablePackageNames = availablePackageNames.concat(
-      names.filter(name => name),
-    )
   }
 
   progressBar.stop()
