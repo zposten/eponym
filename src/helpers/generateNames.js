@@ -1,4 +1,5 @@
 const npmName = require('npm-name')
+const chalk = require('chalk')
 
 const {batch, ProgressBar} = require('../util')
 const {appendToFile, clearFile} = require('./output')
@@ -15,16 +16,17 @@ module.exports = async function generateNames({
   let availablePackageNames = []
   let progressBar = Object.create(ProgressBar).start(limit)
 
-  for (let i = 0; availablePackageNames.length < limit; ++i) {
-    let namesStillNeededCount = limit - availablePackageNames.length
+  for (let i = 1; availablePackageNames.length < limit; ++i) {
     let words = await getWords(i)
 
-    // Get the last N elements in the array because we assume
-    // that the beginning of the array is the same every time
-    // we call to getWords(), and therefore fetching from the
-    // beginning would cause the remaining names never to be
-    // found.
-    words = words.slice(-namesStillNeededCount)
+    // There are no more words to process
+    if (!words.length) {
+      progressBar.stop()
+      console.log(
+        chalk.red(`\n\nCould not find ${limit} words matching criteria`),
+      )
+      break
+    }
 
     let names = await batch(words, {
       size: batchSize,
