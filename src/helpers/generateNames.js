@@ -16,7 +16,7 @@ module.exports = async function generateNames({
   let availablePackageNames = []
   let progressBar = Object.create(ProgressBar).start(limit)
 
-  for (let i = 1; availablePackageNames.length < limit; ++i) {
+  for (let i = 0; availablePackageNames.length < limit; ++i) {
     let words = await getWords(i)
 
     // There are no more words to process

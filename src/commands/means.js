@@ -10,16 +10,20 @@ module.exports = async function means(meansLike, args) {
   let filePath = args.write
   let filter = args.filter
 
+  let previousLastWord = ''
   async function getWords(i) {
-    if (i > 1) return []
-
     let words = await getMeaningfulWords({
       meansLike,
       limit,
       maxWordLength,
+      startsWith: letters[i],
     })
 
-    return words.slice(-limit)
+    let lastWord = words[words.length - 1]
+    let moreWordsRemaining = lastWord !== previousLastWord
+    previousLastWord = lastWord
+
+    return moreWordsRemaining ? words.slice(-limit) : []
   }
 
   let availablePackageNames = await generateNames({
@@ -33,11 +37,16 @@ module.exports = async function means(meansLike, args) {
   outputToUser(filePath, availablePackageNames)
 }
 
-async function getMeaningfulWords({meansLike, limit, maxWordLength}) {
+async function getMeaningfulWords({
+  meansLike,
+  limit,
+  maxWordLength,
+  startsWith,
+}) {
   const dataMuseMax = 1000
 
   let words = await dataMuse
-    .words({ml: meansLike, max: dataMuseMax})
+    .words({ml: meansLike, sp: startsWith + '*', max: dataMuseMax})
     .then(responses => responses.map(res => res.word))
 
   if (maxWordLength) {
@@ -46,3 +55,32 @@ async function getMeaningfulWords({meansLike, limit, maxWordLength}) {
 
   return words.slice(limit)
 }
+
+const letters = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+]

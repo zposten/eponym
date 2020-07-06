@@ -21,7 +21,9 @@ module.exports = async function dictionary(args) {
   let filePath = args.write
   let filter = args.filter
 
-  let getWords = () => getRandomWords({limit, maxWordLength, random})
+  function getWords(i) {
+    return getRandomWords({limit, maxWordLength, random: i == 0 && random})
+  }
 
   let availablePackageNames = await generateNames({
     getWords,
