@@ -28,9 +28,13 @@ module.exports = async function generateNames({
       break
     }
 
+    let batchIndex = 0
     let names = await batch(words, {
       size: batchSize,
       async processItem(word) {
+        batchIndex++
+        if (availablePackageNames.length + batchIndex >= limit) return null
+
         let filter = getFilter(filterName)
         let filtered = await filter(word)
 
@@ -38,6 +42,7 @@ module.exports = async function generateNames({
         return filtered
       },
       async afterEachBatch(batch) {
+        batchIndex = 0
         if (!filePath) return
 
         // Output the results
@@ -66,6 +71,10 @@ function getFilter(filterName) {
 
 async function npmFilter(word) {
   let name = word.replace(/\s/g, '-')
-  let isAvailable = await npmName(name)
-  return isAvailable ? name : null
+  try {
+    let isAvailable = await npmName(name)
+    return isAvailable ? name : null
+  } catch {
+    return null
+  }
 }

@@ -19,10 +19,7 @@ eponym
     'limit results to words of a certain length',
   )
   .option('-w, --write <filePath>', 'Write the results to a file')
-  .option(
-    '-p, --predictable',
-    'Start from the beginning of the dictionary file',
-  )
+  .option('-p, --predictable', 'Start from the beginning of the alphabet')
   .option(
     '-f, --filter <platformName>',
     'Filter names by availability on a platform',
@@ -45,6 +42,7 @@ eponym
     'limit results to words of a certain length',
   )
   .option('-w, --write <filePath>', 'Write the results to a file')
+  .option('-p, --predictable', 'Start from the beginning of the alphabet')
   .option(
     '-f, --filter <platformName>',
     'Filter names by availability on a platform',
