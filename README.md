@@ -1,6 +1,8 @@
 # Wordage
 
-Wordage is a node script capable of generating a list of words that are currently available NPM packages. The list of words is pulled from a modified version of the wonderful [WebstersEnglishDictionary](https://github.com/matthewreagan/WebstersEnglishDictionary).
+Wordage is a node script capable of generating a list of words that are currently available NPM packages.
+
+The list of words is pulled from a modified version of the wonderful [WebstersEnglishDictionary](https://github.com/matthewreagan/WebstersEnglishDictionary) and from the awesome [datamuse API](http://www.datamuse.com/api).
 
 ## Getting started
 
