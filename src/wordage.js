@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const eponym = require('commander')
+const wordage = require('commander')
 
-eponym
+wordage
   .command('search')
   .alias('d')
   .description('Search for words from a dictionary')
@@ -26,7 +26,7 @@ eponym
     'npm',
   )
 
-eponym
+wordage
   .command('means <means-like>')
   .alias('m')
   .description('Fetch words with a similar meaning to another word')
@@ -49,4 +49,4 @@ eponym
     'npm',
   )
 
-eponym.version('0.1.0').parse(process.argv)
+wordage.version('0.1.0').parse(process.argv)
