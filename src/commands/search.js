@@ -15,7 +15,7 @@ module.exports = async function search(args) {
   let filter = args.filter
 
   function getWords(i) {
-    return getRandomWords({limit, maxWordLength, random: i == 0 && random})
+    return getDictionaryWords({limit, maxWordLength, random, offset: i * limit})
   }
 
   let availablePackageNames = await generateNames({
@@ -29,7 +29,7 @@ module.exports = async function search(args) {
   outputToUser(filePath, availablePackageNames)
 }
 
-async function getRandomWords({limit, maxWordLength, random}) {
+async function getDictionaryWords({limit, maxWordLength, random, offset}) {
   let filePath = path.resolve(__dirname, '../../static/dictionary.txt')
 
   let file = await fs.readFile(filePath, 'utf8')
@@ -40,5 +40,5 @@ async function getRandomWords({limit, maxWordLength, random}) {
   }
 
   if (!limit) return words
-  return random ? sample(words, limit) : words.slice(0, limit)
+  return random ? sample(words, limit) : words.slice(offset, offset + limit)
 }
