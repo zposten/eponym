@@ -7,14 +7,7 @@ const {sample} = require('../util')
 const {outputToUser} = require('../helpers/output')
 
 module.exports = async function search(args) {
-  if (args.fullDictionary && !args.write) {
-    let msg =
-      'You must use --write to output to a file when using --full-dictionary'
-    console.log(chalk.red(msg))
-    process.exit(1)
-  }
-
-  let limit = args.fullDictionary ? null : Number(args.limit)
+  let limit = Number(args.limit)
   let maxWordLength = Number(args.maxWordLength)
   let batchSize = Number(args.batchSize)
   let random = !args.predictable

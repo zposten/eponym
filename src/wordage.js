@@ -8,7 +8,6 @@ wordage
   .description('Search for words from a dictionary')
   .action(require('./commands/search'))
   .option('-l, --limit <limit>', 'Number of words to process', 50)
-  .option('--full-dictionary', 'Process every word in the dictionary')
   .option(
     '-b, --batch-size <size>',
     'The number of HTTP requests out at once',

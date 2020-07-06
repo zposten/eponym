@@ -8,9 +8,9 @@ module.exports = async function means(meansLike, args) {
   let limit = Number(args.limit)
   let maxWordLength = Number(args.maxWordLength)
   let batchSize = Number(args.batchSize)
+  let random = !args.predictable
   let filePath = args.write
   let filter = args.filter
-  let random = !args.predictable
 
   let previousLastWord = ''
   async function getWords(i) {
