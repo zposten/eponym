@@ -1,29 +1,29 @@
 {
-  "name": "eponym",
-  "version": "0.1.0",
+  "name": "wordage",
+  "version": "0.2.0",
   "description": "A tool for finding available NPM package names",
-  "repository": "https://github.com/zposten/eponym",
-  "author": "Zach Posten",
+  "repository": "https://github.com/zposten/wordage",
+  "author": "Zach Posten <zach@posten.io>",
   "license": "MIT",
   "private": false,
   "files": [
     "src/**/*.js",
     "static/*"
   ],
-  "main": "src/index.js",
+  "main": "src/wordage.js",
   "bin": {
-    "eponym": "src/index.js"
+    "wordage": "src/wordage.js"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "write": "node src/index.js --write out/packageNames.txt",
-    "execute": "chmod +x index.js"
+    "start": "node src/wordage.js"
   },
   "dependencies": {
     "chalk": "^4.0.0",
     "cli-progress": "^3.8.0",
     "commander": "^5.0.0",
-    "execa": "^4.0.0",
-    "fs-extra": "^9.0.0"
+    "datamuse": "^1.0.5",
+    "fs-extra": "^9.0.0",
+    "npm-name": "^6.0.1",
+    "text-table": "^0.2.0"
   }
 }
