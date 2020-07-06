@@ -29,7 +29,7 @@ wordage
 wordage
   .command('means <means-like>')
   .alias('m')
-  .description('Fetch words with a similar meaning to another word')
+  .description('Search for words with a similar meaning to another word')
   .action(require('./commands/means'))
   .option('-l, --limit <limit>', 'Number of words to process', 50)
   .option(
