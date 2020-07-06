@@ -5,4 +5,5 @@ module.exports = {
   ...require('./progressBar'),
   ...require('./sample'),
   ...require('./shuffle'),
+  ...require('./chunk'),
 }

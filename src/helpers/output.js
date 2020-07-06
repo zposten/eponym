@@ -1,5 +1,8 @@
 const path = require('path')
 const fs = require('fs-extra')
+const table = require('text-table')
+
+const {chunk} = require('../util')
 
 function getOutputPath(filePath) {
   if (!filePath) return null
@@ -31,7 +34,9 @@ function outputToUser(filePath, packageNames) {
       }`,
     )
   } else {
-    console.log('\n' + packageNames.join('\n'))
+    let columnCount = 3
+    let chunked = chunk(packageNames, columnCount)
+    console.log('\n' + table(chunked))
   }
 }
 
